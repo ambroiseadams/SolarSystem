@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Système solaire</title>
+        <style>
+            body {
+                margin: 0;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <script crossorigin='anonymous' type="module" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <script crossorigin='anonymous' type="module" src="./draws.js"></script>
+        <script crossorigin='anonymous' type="module" src="./planetsData.js"></script>
+        <script crossorigin='anonymous' type="module" src="./fonctions.js"></script>
+        <script>
+            let scene, camera, renderer;
+            let io, europa, ganymede, callisto;
+            let mercure, venus, sun, Terre, Lune, mars, jupiter, saturne, uranus, neptune;
+            let cameraTarget = new THREE.Vector3(0, 0, 0);
+            let cameraPosition = new THREE.Vector3(0, 20, 100); //On définit la position de la caméra dans l'espace
+            let cameraSpeed = 0.05;
+            
+            window.onload = function() {
+    
+                init();
+            
+                for (let i = 0; i < planetes.length; i++) {
+                    const planet = planetes[i];
+                    planetes[i].Draw();
+                    planetes[i].position.x = planetes[i].distanceSoleil;
+                    planetes[i].drawEllipse(planet.distanceSoleil, 
+                    planet.distanceSoleil, planet.color);
+                }
+                
+                drawDisc(19, 20, 30, 10, 0, Math.PI*2);
+                drawDiscs(150, 200, 30, 10, 0, Math.PI*2);
+                animate();
+            }
+        </script>
+    </body>
+</html>
